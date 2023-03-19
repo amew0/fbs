@@ -1,0 +1,24 @@
+{% extends "banking/layout.html" %}
+
+{% block title %}FBS{% endblock %}
+
+{% block body %}
+
+{% if user.is_authenticated %}
+    <li>{{ user.username}}</li>
+    <li><a href="{% url 'logout' %}">Logout</a></li>
+    <li><a href="{% url 'family' %}">Family Members</a></li>
+    <li><a href="{% url 'pay_bills' %}">Pay Bills</a></li>
+    <li><a href="{% url 'add_debits' %}">Add Debits</a></li>
+
+
+    {% for account in linked_accounts %}
+        <li>{{account}}</li>
+    {% endfor %}
+
+{% else %}
+    <li><a href="{% url 'login' %}">Login</a></li>
+    <li><a href="{% url 'register' %}">Register</a></li>
+{% endif %}
+
+{% endblock %}

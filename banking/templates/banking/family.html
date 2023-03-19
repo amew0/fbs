@@ -1,0 +1,49 @@
+{% extends "banking/layout.html" %}
+
+{% block title %}FBS{% endblock %}
+
+{% block body %}
+
+{% if user.is_authenticated %}
+    <h1>Family</h1>
+
+    {% if Privilege == "Main" %}
+    <h2>Add Family member</h2>
+
+    <form action="{% url 'family' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input  autocomplete="off" class="form-control" autofocus type="text" name="username" placeholder="Username">
+        </div>
+        <!-- <div class="form-group">
+            <input  autocomplete="off" class="form-control" type="text" name="fullname" placeholder="Full Name (Last First)">
+        </div> -->
+        <div class="form-group">
+            <input type="text" name="phoneNumber" placeholder="Phone number">
+        </div>
+        <div class="form-group">
+            <input type="date" name="dateOfBirth">
+        </div>
+        <div>
+            <label>Privilege :</label>
+            <select name="privilege" >
+                <option value="" disabled selected>Select privilege</option>
+                <option value="Main">Main</option>
+                <option value="Sub">Sub</option>
+            </select><br>
+        </div>
+        
+        </div>
+            <input class="btn btn-primary" type="submit" value="Add">
+        <div>
+
+    </form>
+
+    {% endif %}
+
+    
+{% else %}
+    YOU'RE NOT AUTHENTICATED!!
+{% endif %}
+<li><a href="{% url 'index' %}">Back</a></li>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "banking/layout.html" %}
+
+{% block title %}Pay Bills{% endblock %}
+
+{% block body %}
+
+<form action="{% url 'pay_bills' %}" method="post">
+    {% csrf_token %}
+    <div>
+        <label >Bill Amount: </label>
+        <input type="number" name="bill_amount" step="0.01" min="0" max={{max_amount}}>
+    </div>
+    <div>
+        <label for="bill_name">Bill Name</label>
+        <input id="bill_name" type="text" list="bills" name="bill_name">
+        <datalist id="bills">
+            {% for bill in bills %}
+                <option value="{{ bill.1 }}">
+            {% endfor %}
+        </datalist>
+    </div>
+    <div>
+        <textarea 
+        type="textarea" name="bill_description" 
+        placeholder="Enter bill description here."
+        rows=4 cols="50">
+        </textarea>
+    </div>
+    <div>
+        <input type="checkbox" name="bill_scheduled_monthly" value="Yes">
+        <label>Make this a monthly bill</label>
+    </div>
+    <input type="submit" value="Pay">
+</form>
+
+
+<li><a href="{% url 'index' %}">Back</a></li>
+{% endblock %}
