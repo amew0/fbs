@@ -1,1 +1,1 @@
-web gunicorn banking.wsgi:application --log-file -
+web gunicorn fbs.wsgi:application --log-file -
